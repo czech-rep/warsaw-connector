@@ -1,0 +1,7 @@
+requests
+sqlalchemy==1.4.43
+psycopg2-binary
+alembic
+more_itertools
+asyncio
+requests-async
