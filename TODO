@@ -2,22 +2,23 @@
 TODO
 wykluczyć przystanki które nic nowego nie wnoszą (brak mety i przesiadek) żeby ich nie wyszukiwać
 może zapisywać seen_lines, a przystanek będzie ładował linie?
-problem pętlach jednokierunkowych - nie zaproponuje żeby jechać z powrotem
+problem na odcinkach jednokierunkowych i pętlach - nie zaproponuje żeby jechać z powrotem
 
-segmenty czasowe - najpierw szuka 10 minut w przód i kolejne kroki też 10 minut. Potem dalej
+segmenty czasowe - najpierw szuka 10 minut w przód i kolejne kroki też 10 minut. Potem wewntualnie kolejne 10 minut
 problem bo to bardzo niewydajne - dodatkowe zapytanie
 
 zapisać kilka możliwych połączeń, nie tylko najlepsze
+problem - jak arbitralnie odrzucać długie połączenia?
 
-jak arbitralnie odrzucać długie połączenia?
-
-dorobić api geograficzne (coords)
+dorobić api geograficzne (coords) - najbliższy przystanek do współrzędnych
 szukaj po nazwie przystanku
 
-use async queues and asyncio
+BFS z użyciem async queues and asyncio
 
 ##
 use pip compile
 dockerize app
 
 repository/models to domain and sepparate from registries
+
+web api with fastapi

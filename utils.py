@@ -22,7 +22,7 @@ def add_timedelta_to_time(
 ) -> datetime.time:
     added = datetime.datetime.combine(datetime.date.today(), t) + delta
     return added.time()
-    # TODO implement inequality search in table of hours that support all hours
+    # TODO implement inequality search in table of hours that support all hours (after midnight)
 
 def add_minutes_to_hour(t, minutes):
     return add_timedelta_to_time(t, datetime.timedelta(minutes=minutes))
