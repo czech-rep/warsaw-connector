@@ -11,7 +11,7 @@ async def download_time_tables(bus_stops: List):
         tasks=bus_stops,
         async_task_fn=async_workers.handle_timetables_for_one_stop,
         concurrent_count=70, # at 100 workers works bad due to timeouts (api is too slow?)
-        chunk_size=500,
+        chunk_size=400,
         chunk_call=session.commit,
     )
 
