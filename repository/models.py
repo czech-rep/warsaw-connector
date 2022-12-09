@@ -195,8 +195,8 @@ class TableData:
     # from relations:
     bus_stop: int
     line: int
-    bus_stop_obj: BusStop
-    line_obj: Lines
+    bus_stop_obj: BusStop = field(init=False)
+    line_obj: Lines = field(init=False)
 
     @classmethod
     def from_api_data(cls, api_dict, bus_stop_id: int, line_id: int):
@@ -218,8 +218,8 @@ class TableData:
             line=line_id,
         )
 
-    # def __hash__(self) -> int:
-    #     return hash((self.brigade, self.bus_stop, self.line, self.time))
+    def __hash__(self) -> int:
+        return hash((self.brigade, self.bus_stop, self.line, self.time))
 
     @property
     def course_id(self):
