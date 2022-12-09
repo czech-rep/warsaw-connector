@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from typing import Union, List, Dict, Iterable
 
 
-@dataclass  # column bus_stops
+@dataclass  # table bus_stops
 class BusStop:
     id: int = field(init=False)
     stop_id: str # TODO change to unit
@@ -27,28 +27,18 @@ class BusStop:
 
 
 @dataclass
-class StopData:  # mapped to column
+class StopData:  # mapped to table bus_stop_data
     id: int = field(init=False)
     street_id: Union[str, None]
     geo_width: str  # TODO create GeoCoords type
     geo_length: str
     direction: Union[str, None]
     valid_from: datetime.datetime
-    bus_stop: int  # relation to BusStop
+    bus_stop: int  # foreign key to BusStop
 
     @classmethod
     def from_api_data(cls, api_data: "StopDataRegistry.ApiStopData", bus_stop: BusStop):
-        # we provide a object here, boceouse id may be not yet created
-        """[
-            {"value": "1001", "key": "zespol"},
-            {"value": "01", "key": "slupek"},
-            {"value": "Kijowska", "key": "nazwa_zespolu"},
-            {"value": "2201", "key": "id_ulicy"},
-            {"value": "52.248455", "key": "szer_geo"},
-            {"value": "21.044827", "key": "dlug_geo"},
-            {"value": "al.Zieleniecka", "key": "kierunek"},
-            {"value": "2022-07-01 00:00:00.0", "key": "obowiazuje_od"},
-        ]"""
+        # bus_stop - we provide a object here, boceouse id may be not yet created
         return cls(
             street_id=api_data.id_ulicy,
             geo_width=api_data.szer_geo,
@@ -200,15 +190,8 @@ class TableData:
 
     @classmethod
     def from_api_data(cls, api_dict, bus_stop_id: int, line_id: int):
-        """[
-            {"value": "null", "key": "symbol_2"},
-            {"value": "null", "key": "symbol_1"},
-            {"value": "59", "key": "brygada"},
-            {"value": "Dw.Wschodni (Lubelska)", "key": "kierunek"},
-            {"value": "TP-DWL", "key": "trasa"},
-            {"value": "05:34:00", "key": "czas"},
-        ]"""
-        api_data = ApiStopTable(**api_dict)
+        api_data = ApiStopTable(**api_dict) 
+        # TODO maybe omit this object and construct using dict.get
         return cls(
             brigade=api_data.brygada,
             direction=api_data.kierunek,
