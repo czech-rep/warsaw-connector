@@ -6,7 +6,7 @@ from typing import Union, List, Dict, Iterable
 @dataclass  # table bus_stops
 class BusStop:
     id: int = field(init=False)
-    stop_id: str # TODO change to unit
+    stop_id: str  # TODO change to unit
     number: str  #  "01", "02", "78", ... - not consistent
     name: str
     stop_data: List["StopData"] = field(default_factory=list)
@@ -190,7 +190,7 @@ class TableData:
 
     @classmethod
     def from_api_data(cls, api_dict, bus_stop_id: int, line_id: int):
-        api_data = ApiStopTable(**api_dict) 
+        api_data = ApiStopTable(**api_dict)
         # TODO maybe omit this object and construct using dict.get
         return cls(
             brigade=api_data.brygada,
