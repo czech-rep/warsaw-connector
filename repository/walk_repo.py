@@ -6,9 +6,11 @@ from sqlalchemy.future import select
 from sqlalchemy.orm import joinedload, selectinload
 from repository import session
 from typing import Iterable
+from functools import lru_cache
 
 
-def get_sibling_bus_stops(bus_stop: BusStop):
+@lru_cache(3000)
+def get_bus_stops_of_same_unit(bus_stop: BusStop):
     q = select(BusStop).filter(BusStop.stop_id == bus_stop.stop_id)
     return session.execute(q).scalars()
 
@@ -30,8 +32,9 @@ def get_outgoing_tables(
 def get_departures_from_unit(
     bus_stop: BusStop, time: datetime.time, min_ahead: int = 60
 ) -> Iterable[TableData]:
-    time = utils.add_minutes_to_hour(time, 1) # TODO add to have a minute for change
-    bus_stop_ids=list(stop.id for stop in get_sibling_bus_stops(bus_stop)) 
+    time = utils.add_minutes_to_hour(time, 1)
+    # add 1 to have a minute for change TODO do it better
+    bus_stop_ids = list(stop.id for stop in get_bus_stops_of_same_unit(bus_stop))
     return get_outgoing_tables(bus_stop_ids, time, min_ahead)
 
 
