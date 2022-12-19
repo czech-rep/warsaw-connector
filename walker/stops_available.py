@@ -35,8 +35,8 @@ class Ride:
 
 
 class Walker:
-    max_iter = 5
-    additional_iter = 0  # after finding solution
+    max_depth = 5
+    additional_depth = 0  # after finding solution
 
     def __init__(self, start: models.BusStop, end: models.BusStop, time: datetime.time):
         self.start = start
@@ -53,12 +53,12 @@ class Walker:
     def solve(self):
         print(f"search to {self.end} from {self.start} at {self.time_start}")
 
-        for i in range(self.max_iter):
+        for i in range(self.max_depth):
             print("iteration", i)
             if self.do_one_step():
                 break
 
-        for j in range(self.additional_iter):
+        for j in range(self.additional_depth):
             print("additional iteration", j)
             self.do_one_step()
 
