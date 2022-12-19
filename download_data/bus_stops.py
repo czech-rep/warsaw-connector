@@ -1,4 +1,5 @@
 from repository import repo, models, requests_um, session, data_loader
+import utils
 
 
 def download_all_bus_stops(stop_registry):
@@ -11,7 +12,8 @@ def download_all_bus_stops(stop_registry):
 
 
 if __name__ == "__main__":
-    stop_registry = models.StopDataRegistry.from_queried_all(
-        repo.get_bus_stops_sole()
-    )
-    download_all_bus_stops(stop_registry)
+    with utils.Timer():
+        stop_registry = models.StopDataRegistry.from_queried_all(
+            repo.get_bus_stops_sole()
+        )
+        download_all_bus_stops(stop_registry)
