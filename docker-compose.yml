@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: postgres_db
-    image: postgres:latest
+    image: postgres:latest # todo specific postgres
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -31,3 +31,4 @@ services:
 
 volumes:
   pgdata:
+  pgdata_test:
