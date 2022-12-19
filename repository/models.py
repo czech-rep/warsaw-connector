@@ -205,7 +205,7 @@ class TableData:
         return hash((self.brigade, self.bus_stop, self.line, self.time))
 
     @property
-    def course_id(self):
+    def course_hash(self):
         return hash((self.brigade, self.direction, self.route, self.line))
 
     def __repr__(self) -> str:
